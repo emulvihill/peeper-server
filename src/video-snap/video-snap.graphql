@@ -1,0 +1,26 @@
+type VideoSnap {
+  # Example field (placeholder)
+  name: String!
+  data: String!
+}
+
+input CreateVideoSnapInput {
+  # Example field (placeholder)
+  name: String!
+  data: String!
+}
+
+input UpdateVideoSnapInput {
+  id: Int!
+}
+
+type Query {
+  videoSnaps: [VideoSnap]!
+  videoSnap(id: Int!): VideoSnap
+}
+
+type Mutation {
+  createVideoSnap(createVideoSnapInput: CreateVideoSnapInput!): VideoSnap!
+  updateVideoSnap(updateVideoSnapInput: UpdateVideoSnapInput!): VideoSnap!
+  removeVideoSnap(id: Int!): VideoSnap
+}
