@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { VideoSnapResolver } from './video-snap.resolver';
 import { VideoSnapService } from './video-snap.service';
+import { VideoSnapResolver } from './video-snap.resolver';
 
 describe('VideoSnapResolver', () => {
   let resolver: VideoSnapResolver;

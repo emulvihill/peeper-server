@@ -1,27 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreateVideoSnapInput } from './dto/create-video-snap.input';
-import { UpdateVideoSnapInput } from './dto/update-video-snap.input';
-import {VideoSnap} from "./entities/video-snap.entity";
+import { VideoSnap } from "./video-snap.entity";
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class VideoSnapService {
-  create(createVideoSnapInput: CreateVideoSnapInput) {
-    return 'This action adds a new videoSnap';
+  constructor(
+    @InjectRepository(VideoSnap)
+    private videoSnapRepository: Repository<VideoSnap>,
+  ) { }
+
+  create(input: VideoSnap): Promise<VideoSnap> {
+    return this.videoSnapRepository.save(input);
   }
 
-  findAll() {
-    return [new VideoSnap("foo", "bar")];
+  findAll(): Promise<VideoSnap[]> {
+    return this.videoSnapRepository.find();
   }
 
-  findOne(id: number) {
-    return new VideoSnap("foo", "bar");
+  findAllForFeed(feed: number): Promise<VideoSnap[]> {
+    return this.videoSnapRepository.findBy({ feed });
   }
 
-  update(id: number, updateVideoSnapInput: UpdateVideoSnapInput) {
-    return `This action updates a #${id} videoSnap`;
+  findOne(id: number): Promise<VideoSnap | null> {
+    return this.videoSnapRepository.findOneBy({ id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} videoSnap`;
+  async remove(id: number) {
+    await this.videoSnapRepository.delete(id);
   }
 }

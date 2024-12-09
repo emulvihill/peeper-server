@@ -2,13 +2,14 @@ import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { AppModule } from './../src/app.module';
 import { INestApplication } from '@nestjs/common';
+import { VideoSnapModule } from 'src/video-snap/video-snap.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, VideoSnapModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
